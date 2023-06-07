@@ -6,7 +6,7 @@ import { basicSchema } from '@/schemas';
  
  
  function Form() {
-  const {values,handleBlur,handleChange,handleSubmit   } = useFormik({
+  const {values,errors,handleBlur,handleChange,handleSubmit   } = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -30,7 +30,7 @@ import { basicSchema } from '@/schemas';
          onChange={handleChange}
          value={values.firstName}
          onBlur={handleBlur}
-       />
+         className={errors.email?"input-error":""}/>
        <label htmlFor="lastName">Last Name</label>
        <input
          id="lastName"
