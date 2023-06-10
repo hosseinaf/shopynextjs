@@ -3,10 +3,18 @@
 import React from 'react'
 import styles from './form.module.css'
 import { basicSchema } from '@/schemas';
- 
+import { resolve } from 'path';
+
+
+const onSubmit= async(values:any,action:any) => {
+  console.log(values)
+  alert(JSON.stringify(values, null, 2));
+  await new Promise((resolve)=>setTimeout(resolve,1000))
+   action.resetForm()
+ };
  
  function Form() {
-  const {values,errors,handleBlur,handleChange,handleSubmit   } = useFormik({
+  const {values,errors,touched,isSubmitting,handleBlur,handleChange,handleSubmit   } = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
@@ -14,9 +22,8 @@ import { basicSchema } from '@/schemas';
       password:''
     },
     validationSchema:basicSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    onSubmit,
+   
   });
 
    return (
@@ -30,7 +37,8 @@ import { basicSchema } from '@/schemas';
          onChange={handleChange}
          value={values.firstName}
          onBlur={handleBlur}
-         className={errors.email?"input-error":""}/>
+         className={errors.firstName && touched.firstName?"input-error":""}/>
+         {errors.firstName && touched.firstName?<p className='error'>{errors.firstName}</p>:""}
        <label htmlFor="lastName">Last Name</label>
        <input
          id="lastName"
@@ -39,7 +47,9 @@ import { basicSchema } from '@/schemas';
          onChange={handleChange}
          value={values.lastName}
          onBlur={handleBlur}
+          className={errors.lastName && touched.lastName?"input-error":""}
        />
+        {errors.lastName && touched.lastName?<p className='error'>{errors.lastName}</p>:""}
        <label htmlFor="email">Email Address</label>
        <input
          id="email"
@@ -48,7 +58,9 @@ import { basicSchema } from '@/schemas';
          onChange={handleChange}
          value={values.email}
          onBlur={handleBlur}
+         className={errors.email && touched.email?"input-error":""}
        />
+        {errors.email && touched.email?<p className='error'>{errors.email}</p>:""}
        <label htmlFor="email">Password</label>
        <input
          id="password"
@@ -57,8 +69,10 @@ import { basicSchema } from '@/schemas';
          onChange={handleChange}
          value={values.password}
          onBlur={handleBlur}
+         className={errors.password && touched.password?"input-error":""}
        />
-       <button type="submit">Submit</button>
+        {errors.password && touched.password?<p className='error'>{errors.password}</p>:""}
+       <button disabled={isSubmitting} type="submit">Submit</button>
      </form>
     
       </div>
