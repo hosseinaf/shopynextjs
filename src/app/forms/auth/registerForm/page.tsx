@@ -46,13 +46,12 @@ const RegisterFormValidationSchema=yup.object().shape({
 })
 
 const RegisterForm = withFormik<RegisterFormProps, RegisterFormValues>({
-  mapPropsToValues: (props) => {
-    return {
+  mapPropsToValues:props => ({
       name: props.name ?? "",
       email: "",
       password: "",
-    };
-  },
+    }),
+ 
   validationSchema:RegisterFormValidationSchema,
   handleSubmit: (values) => {
     //console.log(values);
