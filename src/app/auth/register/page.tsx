@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
 import RegisterForm from"../../../app/forms/auth/registerForm/page"
+import { useRouter } from 'next/navigation'
 
 const Page = () => {
+  const router = useRouter()
+  
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -18,7 +21,7 @@ const Page = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-         <RegisterForm name="hesam mousavi"/>
+         <RegisterForm router={router} name="hesam mousavi"/>
         </div>
       </div>
     </>

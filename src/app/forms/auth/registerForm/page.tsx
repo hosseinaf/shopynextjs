@@ -5,25 +5,22 @@ import * as yup from 'yup';
 import { RegisterFormValuesInterface } from "@/app/contracts/auth/page";
 import InnerRegisterForm from "@/components/auth/innerRegisterForm";
 import callApi from "@/app/helper/callApi";
-import { Router } from "next/router";
+import { Router } from 'next/router'
+ 
+ 
  
 
-import { useRouter } from 'next/navigation'
-import { log } from "console";
  
-function changeRouter(href:any) {
-  alert('ok')
-  console.log(href)
-  const router = useRouter();
-   router.push( href)
-}
-
+ 
+ 
+ 
  
 
 
 
 interface RegisterFormProps {
   name?: string;
+  router:any
   
 }
 
@@ -45,16 +42,22 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValuesInterface>(
   validationSchema:RegisterFormValidationSchema,
   
   
-  handleSubmit: async(values) => {
+  handleSubmit: async(values,{props}) => {
     
-    
-    //  const res=await callApi().post('/auth/register',values)
    
-    
-
-     changeRouter('/auth/login')
+    const res=await callApi().post('/auth/register',values)
+   // console.log(res.status)
+    if(res.status===201){
+      //Router.push('/auth/login')
+      props.router.push('/auth/login')
+    }
+ 
    
+  
+     //('/auth/login')
     
+ 
+  
   },
 })(InnerRegisterForm);
 

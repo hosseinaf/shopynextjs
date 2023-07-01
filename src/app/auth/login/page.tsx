@@ -1,8 +1,9 @@
 "use client"
 import React from 'react'
 import LoginForm from"../../forms/auth/loginForm/page"
-
-function page() {
+import { useCookies } from "react-cookie";
+function Page() {
+  const[cookies,setCookie]=useCookies(['shopy-token'])
   return (
     <>
      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -18,11 +19,11 @@ function page() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-         <LoginForm />
+         <LoginForm  setCookie={setCookie}/>
         </div>
       </div>
     </>
   )
 }
 
-export default page
+export default Page
