@@ -5,6 +5,7 @@ import { RegisterFormValuesInterface } from "@/app/contracts/auth/page";
 import InnerRegisterForm from "@/components/auth/innerRegisterForm";
 import callApi from "@/app/helper/callApi";
 import { Router } from "next/router";
+import InnerRegisterFormNumber from "@/components/auth/innerRegisterFormNumber";
 import ValidationError from "@/app/exceptions/validiationError";
 
 interface RegisterFormProps {
@@ -12,24 +13,27 @@ interface RegisterFormProps {
   router: any;
 }
 
+const phoneRegExp = /^(0|0098|\+98)9(0[1-5]|[1 3]\d|2[0-2]|98)\d{7}$/
 const RegisterFormValidationSchema = yup.object().shape({
   name: yup.string().required().min(4),
-  email: yup.string().required().email(),
-  password: yup.string().required().min(8),
+  phone : yup.string().required().min(8).matches(phoneRegExp, 'the phone format is not correct')
+  
 });
 
-const RegisterForm = withFormik<RegisterFormProps, RegisterFormValuesInterface>(
+const RegisterFormNumber = withFormik<RegisterFormProps, RegisterFormValuesInterface>(
   {
     mapPropsToValues: (props) => ({
       name: props.name ?? "",
-      email: "",
-      password: "",
+      phone: "",
+      
     }),
 
     validationSchema: RegisterFormValidationSchema,
 
-    handleSubmit: async (values, { props, setFieldError } ) => {
-   
+    handleSubmit: async (values, { props,setFieldError }) => {
+    
+
+      //('/auth/login')
       try{
         const res = await callApi().post("/auth/register", values);
         // console.log(res.status)
@@ -45,10 +49,8 @@ const RegisterForm = withFormik<RegisterFormProps, RegisterFormValuesInterface>(
           // setFieldError("email", "asdsasdd");
         } 
       }
-
-      //('/auth/login')
     },
   }
-)(InnerRegisterForm);
+)(InnerRegisterFormNumber);
 
-export default RegisterForm;
+export default RegisterFormNumber;

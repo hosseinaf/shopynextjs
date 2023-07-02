@@ -2,6 +2,8 @@
 import React from "react";
 import RegisterForm from"../../../app/forms/auth/registerForm/page"
 import { useRouter } from 'next/navigation'
+ 
+import RegisterFormNumber from "@/app/forms/auth/registerFormNumber/page";
 
 const Page = () => {
   const router = useRouter()
@@ -21,7 +23,8 @@ const Page = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-         <RegisterForm router={router} name="hesam mousavi"/>
+         {/* <RegisterForm router={router} name="hesam mousavi"/> */}
+         <RegisterFormNumber router={router} name="hesam mousavi"/>
         </div>
       </div>
     </>
