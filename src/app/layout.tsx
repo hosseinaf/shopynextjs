@@ -19,7 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={inter.className} >
+        {/* <h1>welcome</h1> */}
      <Provider store={store }>
      {children}
      </Provider>

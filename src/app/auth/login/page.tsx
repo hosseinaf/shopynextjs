@@ -2,11 +2,21 @@
 import React from 'react'
 import LoginForm from"../../forms/auth/loginForm/page"
 import { useCookies } from "react-cookie";
-import LoginFormNumber from '@/app/forms/loginFormNumber/page';
+import LoginFormNumber from '@/app/forms/auth/loginFormNumber/page';
 import { useRouter } from 'next/navigation'
+import { useAppDispatch } from '@/hooks';
+import { updatePhoneVerifyToken } from '@/redux/store/auth';
 function Page() {
   const router = useRouter()
-  const[cookies,setCookie]=useCookies(['shopy-token'])
+  
+
+  const dispatch=useAppDispatch();
+  const setPhoneVerifyToken=(token:string)=>{
+    dispatch(updatePhoneVerifyToken(token))
+  }
+
+
+
   return (
     <>
      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -23,7 +33,7 @@ function Page() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
          {/* <LoginForm  setCookie={setCookie}/> */}
-         <LoginFormNumber  setCookie={setCookie} router={router}/>
+         <LoginFormNumber    router={router} setToken={setPhoneVerifyToken}/>
         </div>
       </div>
     </>

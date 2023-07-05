@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { RegisterFormValuesInterface } from "@/app/contracts/auth/page";
 import InnerRegisterForm from "@/components/auth/innerRegisterForm";
 import callApi from "@/app/helper/callApi";
-import { Router } from "next/router";
 import ValidationError from "@/app/exceptions/validiationError";
 
 interface RegisterFormProps {

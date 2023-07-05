@@ -38,7 +38,6 @@ const RegisterFormNumber = withFormik<RegisterFormProps, RegisterFormValuesInter
         const res = await callApi().post("/auth/register", values);
         // console.log(res.status)
         if (res.status === 201) {
-          //Router.push('/auth/login')
           props.router.push("/auth/login");
         }
 
